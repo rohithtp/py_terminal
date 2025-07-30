@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>py-terminal</id>
+    <version>1.0.0</version>
+    <title>Py Terminal</title>
+    <authors>Your Name</authors>
+    <projectUrl>https://github.com/yourusername/py_terminal</projectUrl>
+    <licenseUrl>https://github.com/yourusername/py_terminal/blob/main/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/yourusername/py_terminal</projectSourceUrl>
+    <docsUrl>https://github.com/yourusername/py_terminal#readme</docsUrl>
+    <bugTrackerUrl>https://github.com/yourusername/py_terminal/issues</bugTrackerUrl>
+    <tags>py-terminal terminal ui rich python command-execution</tags>
+    <summary>A powerful terminal-based UI web project using Python and Rich</summary>
+    <description>
+      A terminal-based UI application with beautiful formatting, interactive menus,
+      and advanced command execution capabilities. Features dual execution modes
+      (interactive and capture) for different use cases.
+      
+      Features:
+      - Beautiful Terminal UI with styled panels
+      - Interactive Menu System with logical grouping
+      - Command Execution with multiple execution modes
+      - Real-time Command Monitoring for long-running processes
+      - Comprehensive Error Handling with user-friendly messages
+    </description>
+    <releaseNotes>Initial release of Py Terminal</releaseNotes>
+    <copyright>Public Domain</copyright>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package> 

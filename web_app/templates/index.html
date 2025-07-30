@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Py Terminal Web</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #00ff00;
+            margin: 0;
+        }
+        
+        .command-section {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .command-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .command-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .command-input select {
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        
+        .command-input button {
+            padding: 10px 20px;
+            background-color: #00ff00;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .command-input button:hover {
+            background-color: #00cc00;
+        }
+        
+        .output-section {
+            background-color: #1e1e1e;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 15px;
+            min-height: 200px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        
+        .output-line {
+            margin: 2px 0;
+        }
+        
+        .stdout {
+            color: #00ff00;
+        }
+        
+        .stderr {
+            color: #ff0000;
+        }
+        
+        .error {
+            color: #ff6666;
+        }
+        
+        .status {
+            color: #ffff00;
+        }
+        
+        .process-controls {
+            margin-top: 10px;
+        }
+        
+        .process-controls button {
+            padding: 5px 10px;
+            margin-right: 10px;
+            background-color: #ff6666;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .process-controls button:hover {
+            background-color: #cc0000;
+        }
+        
+        .running-processes {
+            background-color: #2d2d2d;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .process-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #1e1e1e;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Py Terminal Web</h1>
+            <p>A powerful terminal-based UI web project using Python and Rich</p>
+        </div>
+        
+        <div class="command-section">
+            <h3>Command Execution</h3>
+            <div class="command-input">
+                <input type="text" id="commandInput" placeholder="Enter command (e.g., ls -la, ps aux, top)">
+                <select id="modeSelect">
+                    <option value="capture">Capture Mode</option>
+                    <option value="interactive">Interactive Mode</option>
+                </select>
+                <button onclick="executeCommand()">Execute</button>
+            </div>
+            
+            <div class="output-section" id="outputSection">
+                <div class="output-line status">Ready to execute commands...</div>
+            </div>
+            
+            <div class="process-controls" id="processControls" style="display: none;">
+                <button onclick="stopCurrentProcess()">Stop Process</button>
+                <button onclick="clearOutput()">Clear Output</button>
+            </div>
+        </div>
+        
+        <div class="running-processes">
+            <h3>Running Processes</h3>
+            <div id="processesList">
+                <div class="output-line status">No processes running</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentProcessId = null;
+        let outputPolling = null;
+
+        async function executeCommand() {
+            const command = document.getElementById('commandInput').value.trim();
+            const mode = document.getElementById('modeSelect').value;
+            
+            if (!command) {
+                addOutput('Please enter a command', 'error');
+                return;
+            }
+            
+            addOutput(`Executing: ${command} (${mode} mode)`, 'status');
+            
+            try {
+                const response = await fetch('/api/execute', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ command, mode })
+                });
+                
+                const result = await response.json();
+                
+                if (result.error) {
+                    addOutput(`Error: ${result.error}`, 'error');
+                    return;
+                }
+                
+                currentProcessId = result.process_id;
+                document.getElementById('processControls').style.display = 'block';
+                
+                if (mode === 'interactive') {
+                    // Start polling for output
+                    startOutputPolling();
+                } else {
+                    // For capture mode, poll once after a short delay
+                    setTimeout(() => {
+                        pollOutput();
+                    }, 1000);
+                }
+                
+                updateProcessesList();
+                
+            } catch (error) {
+                addOutput(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        function startOutputPolling() {
+            if (outputPolling) {
+                clearInterval(outputPolling);
+            }
+            
+            outputPolling = setInterval(() => {
+                pollOutput();
+            }, 500);
+        }
+
+        async function pollOutput() {
+            if (!currentProcessId) return;
+            
+            try {
+                const response = await fetch(`/api/output/${currentProcessId}`);
+                const outputs = await response.json();
+                
+                for (const output of outputs) {
+                    if (output.type === 'output') {
+                        addOutput(output.data, 'stdout');
+                    } else if (output.type === 'finished') {
+                        if (output.return_code !== undefined) {
+                            addOutput(`Process finished with return code: ${output.return_code}`, 'status');
+                        } else if (output.data) {
+                            if (output.data.stdout) {
+                                addOutput(output.data.stdout, 'stdout');
+                            }
+                            if (output.data.stderr) {
+                                addOutput(output.data.stderr, 'stderr');
+                            }
+                            addOutput(`Process finished with return code: ${output.data.return_code}`, 'status');
+                        }
+                        
+                        // Stop polling
+                        if (outputPolling) {
+                            clearInterval(outputPolling);
+                            outputPolling = null;
+                        }
+                        
+                        currentProcessId = null;
+                        document.getElementById('processControls').style.display = 'none';
+                        updateProcessesList();
+                    } else if (output.type === 'error') {
+                        addOutput(`Error: ${output.data}`, 'error');
+                        
+                        if (outputPolling) {
+                            clearInterval(outputPolling);
+                            outputPolling = null;
+                        }
+                        
+                        currentProcessId = null;
+                        document.getElementById('processControls').style.display = 'none';
+                        updateProcessesList();
+                    }
+                }
+            } catch (error) {
+                addOutput(`Error polling output: ${error.message}`, 'error');
+            }
+        }
+
+        async function stopCurrentProcess() {
+            if (!currentProcessId) return;
+            
+            try {
+                const response = await fetch(`/api/stop/${currentProcessId}`, {
+                    method: 'POST'
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'stopped') {
+                    addOutput('Process stopped by user', 'status');
+                    
+                    if (outputPolling) {
+                        clearInterval(outputPolling);
+                        outputPolling = null;
+                    }
+                    
+                    currentProcessId = null;
+                    document.getElementById('processControls').style.display = 'none';
+                    updateProcessesList();
+                } else {
+                    addOutput(`Error stopping process: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                addOutput(`Error: ${error.message}`, 'error');
+            }
+        }
+
+        function clearOutput() {
+            document.getElementById('outputSection').innerHTML = 
+                '<div class="output-line status">Output cleared...</div>';
+        }
+
+        async function updateProcessesList() {
+            try {
+                const response = await fetch('/api/processes');
+                const result = await response.json();
+                
+                const processesList = document.getElementById('processesList');
+                
+                if (result.processes.length === 0) {
+                    processesList.innerHTML = '<div class="output-line status">No processes running</div>';
+                } else {
+                    processesList.innerHTML = result.processes.map(processId => 
+                        `<div class="process-item">
+                            <span>${processId}</span>
+                            <button onclick="stopProcess('${processId}')">Stop</button>
+                        </div>`
+                    ).join('');
+                }
+            } catch (error) {
+                console.error('Error updating processes list:', error);
+            }
+        }
+
+        async function stopProcess(processId) {
+            try {
+                const response = await fetch(`/api/stop/${processId}`, {
+                    method: 'POST'
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'stopped') {
+                    updateProcessesList();
+                }
+            } catch (error) {
+                console.error('Error stopping process:', error);
+            }
+        }
+
+        function addOutput(text, type) {
+            const outputSection = document.getElementById('outputSection');
+            const outputLine = document.createElement('div');
+            outputLine.className = `output-line ${type}`;
+            outputLine.textContent = text;
+            outputSection.appendChild(outputLine);
+            outputSection.scrollTop = outputSection.scrollHeight;
+        }
+
+        // Handle Enter key in command input
+        document.getElementById('commandInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeCommand();
+            }
+        });
+
+        // Update processes list periodically
+        setInterval(updateProcessesList, 5000);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "py-terminal"
+dynamic = ["version"]
+description = "A powerful terminal-based UI web project using Python and Rich for beautiful terminal output"
+readme = "README.md"
+license = {text = "Unlicense"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+maintainers = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+keywords = ["terminal", "ui", "rich", "command-execution", "system-administration"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: Public Domain",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "rich>=10.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black>=21.0",
+    "flake8>=3.8",
+    "mypy>=0.800",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/py_terminal"
+Documentation = "https://github.com/yourusername/py_terminal#readme"
+Repository = "https://github.com/yourusername/py_terminal"
+"Bug Tracker" = "https://github.com/yourusername/py_terminal/issues"
+
+[project.scripts]
+py-terminal = "terminal_web.main:main"
+
+[tool.setuptools_scm]
+write_to = "terminal_web/_version.py"
+
+[tool.black]
+line-length = 88
+target-version = ['py37']
+
+[tool.mypy]
+python_version = "3.7"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true 
