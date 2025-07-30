@@ -9,12 +9,17 @@ def main():
     while True:
         console.clear()
         console.print(Panel("[bold green]Welcome to Terminal Web![/bold green]\nA terminal-based UI web project.", title="Terminal Web"))
-        console.print("\n[bold]Menu:[/bold]")
+        console.print("\n[bold]Menu Options:[/bold]")
+        console.print("\n[bold blue]Basic Operations:[/bold blue]")
         console.print("[cyan]1.[/cyan] Say Hello")
-        console.print("[cyan]2.[/cyan] Show Info")
-        console.print("[cyan]3.[/cyan] Exit")
-        console.print("[cyan]4.[/cyan] Run Bash Command")
-        choice = Prompt.ask("\nEnter your choice", choices=["1", "2", "3", "4"], default="3")
+        console.print("[cyan]2.[/cyan] Show Project Info")
+        console.print("\n[bold blue]Command Execution:[/bold blue]")
+        console.print("[cyan]3.[/cyan] Run Single Command")
+        console.print("[cyan]4.[/cyan] Execute Multiple Commands")
+        console.print("\n[bold blue]System:[/bold blue]")
+        console.print("[cyan]5.[/cyan] Exit")
+        
+        choice = Prompt.ask("\nEnter your choice", choices=["1", "2", "3", "4", "5"], default="5")
         if choice == "1":
             console.print("\n[bold yellow]Hello, user![/bold yellow]\n")
             input("Press Enter to return to menu...")
@@ -27,17 +32,55 @@ def main():
                 console.print("[bold red]info.md file not found. Please create an info.md file in the project directory.[/bold red]")
             input("Press Enter to return to menu...")
         elif choice == "3":
-            console.print("\n[bold red]Exiting... Goodbye![/bold red]")
-            break
-        elif choice == "4":
             import subprocess
-            cmd = Prompt.ask("Enter the bash command to run (interactive)")
+            cmd = Prompt.ask("Enter the bash command to run")
             console.print(f"\n[bold green]Running:[/bold green] [italic]{cmd}[/italic]\n")
             try:
                 subprocess.run(cmd, shell=True)
             except Exception as e:
                 console.print(f"[bold red]Error running command:[/bold red] {e}")
             input("Press Enter to return to menu...")
+        elif choice == "4":
+            import subprocess
+            console.print("\n[bold cyan]Multiple Commands Execution[/bold cyan]")
+            console.print("Enter commands one by one. Type 'done' when finished, or 'cancel' to abort.\n")
+            
+            commands = []
+            while True:
+                cmd = Prompt.ask("Enter command (or 'done'/'cancel')")
+                if cmd.lower() == 'done':
+                    break
+                elif cmd.lower() == 'cancel':
+                    console.print("[bold yellow]Operation cancelled.[/bold yellow]")
+                    input("Press Enter to return to menu...")
+                    break
+                elif cmd.strip():
+                    commands.append(cmd.strip())
+                else:
+                    console.print("[bold red]Please enter a valid command.[/bold red]")
+            
+            if commands:
+                console.print(f"\n[bold green]Executing {len(commands)} commands:[/bold green]\n")
+                for i, cmd in enumerate(commands, 1):
+                    console.print(f"[bold cyan]Command {i}:[/bold cyan] [italic]{cmd}[/italic]")
+                    try:
+                        result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+                        if result.stdout:
+                            console.print(f"[green]Output:[/green]\n{result.stdout}")
+                        if result.stderr:
+                            console.print(f"[yellow]Errors:[/yellow]\n{result.stderr}")
+                        if result.returncode != 0:
+                            console.print(f"[bold red]Command failed with exit code {result.returncode}[/bold red]")
+                        console.print("-" * 50)
+                    except Exception as e:
+                        console.print(f"[bold red]Error running command:[/bold red] {e}")
+                        console.print("-" * 50)
+                
+                console.print("\n[bold green]All commands completed![/bold green]")
+            input("Press Enter to return to menu...")
+        elif choice == "5":
+            console.print("\n[bold red]Exiting... Goodbye![/bold red]")
+            break
 
 
 if __name__ == "__main__":
