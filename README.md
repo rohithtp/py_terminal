@@ -166,3 +166,24 @@ Potential features for future development:
 ## 📝 License
 
 This project is licensed under the terms specified in the LICENSE file. 
+
+## 🔎 Status Capture Utility
+
+This repository includes a lightweight status-capture utility to audit the
+workspace, collect git metadata, system/runtime info, and dependency health.
+
+Usage:
+
+```sh
+# Run the status capture CLI (pretty output)
+python -m terminal_web.status_capture
+
+# JSON output
+python -m terminal_web.status_capture --json
+
+# Or use from the interactive menu: run the app and choose "Show Status"
+python terminal_web/main.py
+```
+
+Programmatically, call `gather_status(path='.')` to get a dict and
+`print_status(status)` to print a readable report.

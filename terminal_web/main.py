@@ -5,6 +5,10 @@ from rich.markdown import Markdown
 import subprocess
 import signal
 import time
+# Defer importing `status_capture` until needed to avoid import issues when
+# running this file as a script (ensures package resolution works).
+gather_status = None
+print_status = None
 
 
 def main():
@@ -21,8 +25,9 @@ def main():
         console.print("[cyan]4.[/cyan] Execute Multiple Commands")
         console.print("\n[bold blue]System:[/bold blue]")
         console.print("[cyan]5.[/cyan] Exit")
+        console.print("[cyan]6.[/cyan] Show Status")
         
-        choice = Prompt.ask("\nEnter your choice", choices=["1", "2", "3", "4", "5"], default="5")
+        choice = Prompt.ask("\nEnter your choice", choices=["1", "2", "3", "4", "5", "6"], default="5")
         if choice == "1":
             console.print("\n[bold yellow]Hello, user![/bold yellow]\n")
             input("Press Enter to return to menu...")
@@ -116,6 +121,31 @@ def main():
         elif choice == "5":
             console.print("\n[bold red]Exiting... Goodbye![/bold red]")
             break
+        elif choice == "6":
+            console.print('\n[bold blue]Status Capture:[/bold blue]\n')
+            try:
+                # Load the status_capture module directly from file to avoid
+                # package import issues when running this script directly.
+                import runpy
+                import types
+                from pathlib import Path
+
+                pkg_dir = Path(__file__).resolve().parent
+                file_path = pkg_dir.joinpath('status_capture.py')
+                module_dict = runpy.run_path(str(file_path))
+                mod = types.SimpleNamespace(
+                    gather_status=module_dict.get('gather_status'),
+                    print_status=module_dict.get('print_status'),
+                )
+
+                if not getattr(mod, 'gather_status', None) or not getattr(mod, 'print_status', None):
+                    raise RuntimeError('required functions not found in status_capture')
+
+                status = mod.gather_status('.')
+                mod.print_status(status)
+            except Exception as e:
+                console.print(f'[bold red]Status capture utility not available:[/bold red] {e}')
+            input("Press Enter to return to menu...")
 
 
 if __name__ == "__main__":
