@@ -5,6 +5,16 @@ from rich.markdown import Markdown
 import subprocess
 import signal
 import time
+import sys
+from pathlib import Path
+
+# Ensure project root is on sys.path so sibling modules (e.g. safety_net)
+# can be imported when running this file as a script.
+ROOT = Path(__file__).resolve().parent.parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from safety_net import run as safety_run
 # Defer importing `status_capture` until needed to avoid import issues when
 # running this file as a script (ensures package resolution works).
 gather_status = None
@@ -49,15 +59,15 @@ def main():
             try:
                 if mode == "interactive":
                     console.print("[yellow]Running in interactive mode (use Ctrl+C to stop long-running commands)[/yellow]\n")
-                    subprocess.run(cmd, shell=True)
+                    res = safety_run(cmd, mode="interactive")
                 else:
                     console.print("[yellow]Running in capture mode (output will be displayed after completion)[/yellow]\n")
-                    result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
-                    if result.stdout:
+                    result = safety_run(cmd, mode="capture")
+                    if getattr(result, "stdout", None):
                         console.print(f"[green]Output:[/green]\n{result.stdout}")
-                    if result.stderr:
+                    if getattr(result, "stderr", None):
                         console.print(f"[yellow]Errors:[/yellow]\n{result.stderr}")
-                    if result.returncode != 0:
+                    if getattr(result, "returncode", 0) != 0:
                         console.print(f"[bold red]Command failed with exit code {result.returncode}[/bold red]")
             except subprocess.TimeoutExpired:
                 console.print("[bold red]Command timed out after 30 seconds[/bold red]")
@@ -95,15 +105,15 @@ def main():
                     try:
                         if mode == "interactive":
                             console.print(f"[yellow]Running command {i} in interactive mode...[/yellow]")
-                            subprocess.run(cmd, shell=True)
+                            res = safety_run(cmd, mode="interactive")
                         else:
                             console.print(f"[yellow]Running command {i} in capture mode...[/yellow]")
-                            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
-                            if result.stdout:
+                            result = safety_run(cmd, mode="capture")
+                            if getattr(result, "stdout", None):
                                 console.print(f"[green]Output:[/green]\n{result.stdout}")
-                            if result.stderr:
+                            if getattr(result, "stderr", None):
                                 console.print(f"[yellow]Errors:[/yellow]\n{result.stderr}")
-                            if result.returncode != 0:
+                            if getattr(result, "returncode", 0) != 0:
                                 console.print(f"[bold red]Command failed with exit code {result.returncode}[/bold red]")
                         console.print("-" * 50)
                     except subprocess.TimeoutExpired:

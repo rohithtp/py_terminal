@@ -187,3 +187,28 @@ python terminal_web/main.py
 
 Programmatically, call `gather_status(path='.')` to get a dict and
 `print_status(status)` to print a readable report.
+
+### Project Judgment
+
+Use the same utility to score the project on four criteria:
+
+```sh
+python -m terminal_web.status_capture --judge
+```
+
+For JSON-only judgment output:
+
+## Hackathon: Day 1 (May 27–28)
+
+This repository includes initial work for the "AI Safety Net" hackathon feature.
+
+- Added a Tier‑1 heuristic preflight scanner to detect potentially dangerous commands.
+- Introduced a lightweight `safety_net.run()` wrapper to present a static preflight warning panel before executing risky commands.
+- Added a `ui` panel renderer and basic confirmation flow for MUTATING+ risk levels.
+- Added unit tests for the preflight heuristics.
+
+These changes are Day‑1 artifacts: heuristics-only preflight (no LLM integration yet). Future work will add Tier‑2 LLM explanations, caching, and self‑healing.
+
+```sh
+python -m terminal_web.status_capture --judge --judge-json
+```

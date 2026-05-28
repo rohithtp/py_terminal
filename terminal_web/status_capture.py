@@ -254,12 +254,89 @@ def print_status(status: Dict, json_out: bool = False) -> None:
                     print(f" - {name}: unknown")
 
 
+def _read_text(path: Path) -> str:
+    try:
+        return path.read_text(encoding='utf-8')
+    except Exception:
+        return ''
+
+
+def _score_use_of_technology(path: Path, status: Dict, readme: str, main_py: str) -> int:
+    score = 0
+    score += 2 if 'rich' in readme.lower() or 'from rich' in main_py or 'import rich' in main_py else 0
+    score += 2 if 'subprocess' in main_py else 0
+    score += 2 if 'Prompt.ask' in main_py or 'Panel(' in main_py or 'Markdown(' in main_py else 0
+    score += 2 if status.get('dependencies', {}).get('declared_requirements_file') else 0
+    score += 2 if any('status_capture' in f.get('path', '') or f.get('path') == 'terminal_web' for f in status.get('workspace_checks', [])) else 0
+    return min(10, score)
+
+
+def _score_usability_and_ux(readme: str, main_py: str) -> int:
+    score = 0
+    score += 3 if 'press enter' in main_py.lower() or 'menu' in main_py.lower() else 0
+    score += 3 if 'usage' in readme.lower() or 'examples' in readme.lower() else 0
+    score += 2 if 'prompt.ask' in main_py.lower() or 'choices=[' in main_py.lower() else 0
+    score += 2 if 'graceful' in readme.lower() or 'error handling' in readme.lower() or 'friendly' in readme.lower() else 0
+    return min(10, score)
+
+
+def _score_originality_and_creativity(readme: str, main_py: str) -> int:
+    score = 0
+    score += 3 if 'terminal' in readme.lower() and 'web' in readme.lower() else 0
+    score += 2 if 'status capture' in readme.lower() or 'status_capture' in main_py else 0
+    score += 2 if 'interactive' in readme.lower() or 'interactive mode' in main_py.lower() else 0
+    score += 2 if 'batch' in readme.lower() or 'multiple commands' in readme.lower() else 0
+    score += 1 if 'future enhancements' in readme.lower() or 'potential features' in readme.lower() else 0
+    return min(10, score)
+
+
+def _score_completion_arc(readme: str, status: Dict, main_py: str) -> int:
+    score = 0
+    score += 3 if 'usage' in readme.lower() or 'how to' in readme.lower() else 0
+    score += 3 if 'terminal_web/main.py' or 'main.py' else 0
+    score += 2 if status.get('workspace_checks') else 0
+    score += 2 if 'status capture' in readme.lower() or 'show status' in main_py.lower() else 0
+    # Explicit journey language is not present, so keep score conservative.
+    return min(10, score)
+
+
+def judge_project(path: str = '.') -> Dict[str, object]:
+    base = Path(path).resolve()
+    status = gather_status(path)
+    readme = _read_text(base.joinpath('README.md'))
+    main_py = _read_text(base.joinpath('terminal_web', 'main.py'))
+
+    judgement = {
+        'use_of_underlying_technology': _score_use_of_technology(base, status, readme, main_py),
+        'usability_and_user_experience': _score_usability_and_ux(readme, main_py),
+        'originality_and_creativity': _score_originality_and_creativity(readme, main_py),
+        'completion_arc': _score_completion_arc(readme, status, main_py),
+        'generated_at': datetime.utcnow().isoformat() + 'Z',
+    }
+    return judgement
+
+
+def print_project_judgment(judgment: Dict[str, object], json_out: bool = False) -> None:
+    if json_out:
+        print(json.dumps(judgment, indent=2))
+        return
+
+    print('--- Project Judgment ---')
+    print(f"Use of underlying technology: {judgment['use_of_underlying_technology']}/10")
+    print(f"Usability and User Experience: {judgment['usability_and_user_experience']}/10")
+    print(f"Originality and Creativity: {judgment['originality_and_creativity']}/10")
+    print(f"Completion Arc: {judgment['completion_arc']}/10")
+    print(f"Judgement generated: {judgment.get('generated_at')}")
+
+
 def _main(argv: Optional[List[str]] = None) -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description='Status Capture utility')
     parser.add_argument('--path', '-p', default='.', help='Workspace path to inspect')
     parser.add_argument('--json', action='store_true', help='Output JSON instead of pretty text')
+    parser.add_argument('--judge', action='store_true', help='Score the project on predefined criteria')
+    parser.add_argument('--judge-json', action='store_true', help='Output only the project judgment JSON')
     parser.add_argument('--output', '-o', help='Write JSON output to file')
     args = parser.parse_args(argv)
 
@@ -271,6 +348,14 @@ def _main(argv: Optional[List[str]] = None) -> int:
         except Exception as e:
             print(f"Failed to write output: {e}", file=sys.stderr)
             return 2
+
+    if args.judge:
+        judgment = judge_project(args.path)
+        if args.judge_json:
+            print(json.dumps(judgment, indent=2))
+        else:
+            print_project_judgment(judgment, json_out=args.json)
+        return 0
 
     print_status(status, json_out=args.json)
     return 0
