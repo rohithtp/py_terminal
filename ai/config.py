@@ -42,17 +42,31 @@ CACHE_DIR = os.path.join(
     os.path.dirname(__file__),
     ".cache"
 )
+CACHE_TTL_SECONDS = int(os.getenv("CACHE_TTL_SECONDS", "3600"))
 
 
 def validate_config() -> bool:
-    """Validate that required configuration is set."""
+    """Validate configuration and emit user-facing warnings.
+
+    The tool should never fail entirely due to missing LLM credentials. If LLM
+    is unavailable, the system should continue in heuristic-only mode.
+    """
     if OFFLINE_MODE:
         return True
     if not LLM_ENABLED:
         print("⚠️  LLM is disabled by configuration. Falling back to heuristic-only mode.")
         return True
     if not LLM_API_KEY and LLM_PROVIDER != "ollama":
-        print("⚠️  Warning: API key not found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY")
+        print("⚠️  Warning: API key not found. LLM features will be skipped.")
+        return True
+    return True
+
+
+def can_use_llm() -> bool:
+    """Return whether LLM calls are currently available."""
+    if OFFLINE_MODE or not LLM_ENABLED:
+        return False
+    if LLM_PROVIDER != "ollama" and not LLM_API_KEY:
         return False
     return True
 

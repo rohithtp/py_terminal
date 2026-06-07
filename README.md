@@ -28,7 +28,7 @@ A powerful terminal-based UI web project using Python and [Rich](https://github.
 
 ## 🛠️ Setup
 
-1. **Create and activate a virtual environment** (already set up):
+1. **Create and activate a virtual environment**:
    ```sh
    python3 -m venv venv
    source venv/bin/activate
@@ -36,8 +36,36 @@ A powerful terminal-based UI web project using Python and [Rich](https://github.
 
 2. **Install dependencies**:
    ```sh
-   pip install --break-system-packages rich
+   pip install -r requirements.txt
    ```
+
+3. **Configure environment variables**:
+   ```sh
+   cp .env.example .env
+   export LLM_API_KEY="your-openai-api-key"
+   export LLM_PROVIDER="openai"
+   export LLM_MODEL="gpt-4"
+   ```
+
+## 🚀 Quickstart
+
+### Run locally
+```sh
+source venv/bin/activate
+python terminal_web/main.py
+```
+
+### Run with Docker
+```sh
+docker build -t py-terminal:latest .
+docker run --rm -it \
+  -e LLM_API_KEY="$LLM_API_KEY" \
+  -e LLM_PROVIDER="openai" \
+  -e LLM_MODEL="gpt-4" \
+  py-terminal:latest
+```
+
+> Use `-it` so the interactive terminal menu works correctly.
 
 ## 🎮 Usage
 
@@ -187,6 +215,21 @@ python terminal_web/main.py
 
 Programmatically, call `gather_status(path='.')` to get a dict and
 `print_status(status)` to print a readable report.
+
+### AI Safety Net
+
+This project includes a lightweight AI safety layer for command execution:
+
+- **Tier-1 heuristics** detect risky commands like `rm -rf`, `git push --force`, and `terraform destroy`
+- **Tier-2 AI preflight** uses an LLM to summarize risk, affected resources, and reversibility notes
+- **Healing suggestions** diagnose failed commands and propose safer fixes
+- **Offline fallback** keeps the app usable even when no API key is present
+
+### Demo and Submission Assets
+
+- `hackathon/DEMO.md` includes a 90-second walkthrough script for judges
+- `terminal_web/status_capture.py` reports repo and environment health
+- The app is designed to work with and without LLM access, which is important for hackathon judging
 
 ### Project Judgment
 

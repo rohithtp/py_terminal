@@ -90,6 +90,9 @@ def show_preflight(
 
 
 def show_healing(suggestion: Dict[str, Any]):
+    if hasattr(suggestion, "__dict__"):
+        suggestion = suggestion.__dict__
+
     title = "Healing Suggestion ✨ AI"
     body = Text()
     body.append("Diagnosis:\n", style="bold")

@@ -78,6 +78,7 @@ class LLMClient:
         while attempt < self.max_retries:
             try:
                 response = litellm.completion(
+                    provider=self.provider,
                     model=self.model,
                     messages=messages,
                     temperature=temp,
@@ -146,7 +147,7 @@ class LLMClient:
 
         try:
             response = litellm.completion(
-                model=self.model,
+                    provider=self.provider,
                 messages=messages,
                 temperature=temp,
                 max_tokens=max_tokens,

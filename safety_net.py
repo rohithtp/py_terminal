@@ -5,7 +5,8 @@ from typing import Optional
 
 from ai.preflight import Preflight, RiskLevel
 from ai.client import get_client
-from ai.config import LLM_ENABLED, OFFLINE_MODE, validate_config
+from ai.config import LLM_MODEL, LLM_PROVIDER, can_use_llm, validate_config
+from ai.cache import get_cached_response, set_cached_response
 from ai.prompts import preflight_messages
 from ai.healer import Healer
 from ui.panels import show_preflight, show_healing
@@ -29,13 +30,23 @@ preflight = Preflight()
 
 
 def _fetch_ai_preflight(command: str) -> dict[str, str] | None:
-    if not LLM_ENABLED or OFFLINE_MODE:
+    if not can_use_llm():
         return None
+
+    cache_context = f"{LLM_PROVIDER}|{LLM_MODEL}"
+    cached = get_cached_response("preflight", command, cache_context)
+    if cached is not None:
+        return cached
+
     try:
         client = get_client()
-        return client.call_json(messages=preflight_messages(command))
+        response = client.call_json(messages=preflight_messages(command))
+        if isinstance(response, dict):
+            set_cached_response("preflight", command, cache_context, response)
+            return response
     except Exception:
-        return None
+        pass
+    return None
 
 
 def _execute(cmd: str, mode: str) -> Result:
@@ -74,8 +85,7 @@ def run(cmd: str, mode: str = "interactive", recursion_depth: int = 0) -> Result
     if recursion_depth >= 2:
         return Result(aborted=False, error="Maximum healing recursion reached.", cmd=cmd)
 
-    if not validate_config():
-        return Result(aborted=True, error="LLM configuration invalid.", cmd=cmd)
+    validate_config()
 
     risk = preflight.score(cmd)
     ai_details = None
@@ -103,9 +113,8 @@ def run(cmd: str, mode: str = "interactive", recursion_depth: int = 0) -> Result
     if result.failed and mode == "capture":
         healer = Healer()
         fix = healer.diagnose(cmd, {"stderr": result.stderr, "returncode": result.returncode})
-        if fix.suggested_command:
-            apply_fix = show_healing(fix.__dict__).confirmed
-            if apply_fix:
-                return run(fix.suggested_command, mode=mode, recursion_depth=recursion_depth + 1)
+        healing_panel = show_healing(fix if hasattr(fix, '__dict__') else fix)
+        if fix.suggested_command and healing_panel.confirmed:
+            return run(fix.suggested_command, mode=mode, recursion_depth=recursion_depth + 1)
 
     return result

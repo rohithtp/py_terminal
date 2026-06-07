@@ -79,14 +79,18 @@ main() {
     echo
     echo "⚠️  Some Ollama checks did not pass. Fix the issues above and rerun this script."
   fi
-
-  if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    echo
-    echo "Run 'source ./verify_ollama.sh' to export Ollama environment variables into your current shell."
-    return
-  fi
-
-  wire_environment
 }
 
+
+# Run checks
 main "$@"
+
+# If the script is being sourced, export environment variables into the
+# current shell. If it's executed directly, print instructions instead.
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+  wire_environment
+else
+  echo
+  echo "Run 'source ./verify_ollama.sh' to export Ollama environment variables into your current shell."
+  exit 0
+fi
