@@ -241,16 +241,16 @@ python -m terminal_web.status_capture --judge
 
 For JSON-only judgment output:
 
-## Hackathon: Day 1 (May 27–28)
+## Hackathon: Final Submission
 
-This repository includes initial work for the "AI Safety Net" hackathon feature.
+This repository contains the completed "AI Safety Net" hackathon feature.
 
-- Added a Tier‑1 heuristic preflight scanner to detect potentially dangerous commands.
-- Introduced a lightweight `safety_net.run()` wrapper to present a static preflight warning panel before executing risky commands.
-- Added a `ui` panel renderer and basic confirmation flow for MUTATING+ risk levels.
-- Added unit tests for the preflight heuristics.
-
-These changes are Day‑1 artifacts plus the first evolution toward Day‑3/Day‑5 work: the safety wrapper now supports Tier-2 AI preflight integration and a healing suggestion workflow. Future work will refine LLM explanations, caching, and end-to-end self-healing.
+- **Tier-1 Heuristic Scanner:** Detects dangerous commands locally without API calls.
+- **Tier-2 AI Preflight:** Uses LLMs to generate risk summaries, affected resources, and reversibility notes for `MUTATING+` risk levels.
+- **Self-Healing Workflow:** Diagnoses failed commands (e.g., permissions, missing files) and generates safe fix suggestions via the LLM, which are re-run through the preflight safety loop.
+- **SQLite Caching:** Caches preflight AI evaluations to avoid duplicate API calls and ensure zero latency for repeated commands.
+- **Status Capture:** A built-in telemetry utility to verify repo and dependency health.
+- **Robust UI:** Rich panel rendering for warnings, healing suggestions, and offline graceful degradation when APIs are unavailable.
 
 ```sh
 python -m terminal_web.status_capture --judge --judge-json

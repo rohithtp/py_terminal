@@ -49,7 +49,17 @@ Expected:
 - The UI falls back gracefully without causing a crash
 - Only the non-LLM warning panel appears
 
-## 6. Show status capture
+## 6. Demonstrate SQLite Caching
+
+- Run a risky command that triggers an LLM preflight, like `rm -rf /tmp/testdir2`
+- Cancel the execution.
+- Run the exact same command again.
+
+Expected:
+- The preflight panel appears instantly (zero latency).
+- A cache hit avoids making a duplicate LLM API call.
+
+## 7. Show status capture
 
 - From the menu, choose `6. Show Status`
 
