@@ -147,7 +147,8 @@ class LLMClient:
 
         try:
             response = litellm.completion(
-                    provider=self.provider,
+                provider=self.provider,
+                model=self.model,
                 messages=messages,
                 temperature=temp,
                 max_tokens=max_tokens,

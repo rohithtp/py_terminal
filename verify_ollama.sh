@@ -87,7 +87,18 @@ main "$@"
 
 # If the script is being sourced, export environment variables into the
 # current shell. If it's executed directly, print instructions instead.
-if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+is_sourced=0
+if [[ -n "${ZSH_VERSION:-}" ]]; then
+  if [[ "${ZSH_EVAL_CONTEXT:-}" == *"file"* ]]; then
+    is_sourced=1
+  fi
+elif [[ -n "${BASH_VERSION:-}" ]]; then
+  if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    is_sourced=1
+  fi
+fi
+
+if [[ ${is_sourced} -eq 1 ]]; then
   wire_environment
 else
   echo
