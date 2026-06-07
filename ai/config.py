@@ -10,10 +10,26 @@ class LLMProvider(Enum):
     HUGGINGFACE = "huggingface"
 
 
+# === Model Aliases ===
+MODEL_ALIASES = {
+    "gpt4": "gpt-4",
+    "gpt3": "gpt-3.5-turbo",
+    "claude3": "claude-3-5-sonnet-20241022",
+    "qwen": "qwen2.5-coder:1.5b",
+    "llama2": "ollama/llama2",
+}
+
+
+def _resolve_model(alias: str) -> str:
+    return MODEL_ALIASES.get(alias.lower(), alias)
+
+
 # === Primary Configuration ===
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "openai").lower()
-LLM_MODEL = os.getenv("LLM_MODEL", "gpt-4")
+LLM_MODEL = _resolve_model(os.getenv("LLM_MODEL", "gpt-4"))
 LLM_API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+LLM_ENABLED = os.getenv("ENABLE_LLM", "true").lower() not in ("0", "false", "no")
+OFFLINE_MODE = os.getenv("OFFLINE_MODE", "false").lower() in ("1", "true", "yes")
 
 # === Performance & Retry Settings ===
 LLM_TIMEOUT = int(os.getenv("LLM_TIMEOUT", "30"))
@@ -27,18 +43,14 @@ CACHE_DIR = os.path.join(
     ".cache"
 )
 
-# === Model Aliases ===
-MODEL_ALIASES = {
-    "gpt4": "gpt-4",
-    "gpt3": "gpt-3.5-turbo",
-    "claude3": "claude-3-5-sonnet-20241022",
-    "qwen": "qwen2.5-coder:1.5b",
-    "llama2": "ollama/llama2",
-}
-
 
 def validate_config() -> bool:
     """Validate that required configuration is set."""
+    if OFFLINE_MODE:
+        return True
+    if not LLM_ENABLED:
+        print("⚠️  LLM is disabled by configuration. Falling back to heuristic-only mode.")
+        return True
     if not LLM_API_KEY and LLM_PROVIDER != "ollama":
         print("⚠️  Warning: API key not found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY")
         return False

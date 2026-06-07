@@ -207,7 +207,7 @@ This repository includes initial work for the "AI Safety Net" hackathon feature.
 - Added a `ui` panel renderer and basic confirmation flow for MUTATING+ risk levels.
 - Added unit tests for the preflight heuristics.
 
-These changes are Day‑1 artifacts: heuristics-only preflight (no LLM integration yet). Future work will add Tier‑2 LLM explanations, caching, and self‑healing.
+These changes are Day‑1 artifacts plus the first evolution toward Day‑3/Day‑5 work: the safety wrapper now supports Tier-2 AI preflight integration and a healing suggestion workflow. Future work will refine LLM explanations, caching, and end-to-end self-healing.
 
 ```sh
 python -m terminal_web.status_capture --judge --judge-json
