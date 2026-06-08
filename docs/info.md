@@ -6,4 +6,4 @@ This is a **demo terminal web app** using [Rich](https://github.com/Textualize/r
 - Uses the [Rich](https://github.com/Textualize/rich) library
 - Supports **Markdown** rendering in the terminal
 
-> Try editing this info in `info.md`! 
+> Try editing this info in `docs/info.md`! 

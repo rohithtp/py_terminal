@@ -78,7 +78,7 @@ python terminal_web/main.py
 
 #### **Basic Operations**
 - **Option 1: Say Hello** - Simple greeting message
-- **Option 2: Show Project Info** - Displays content from `info.md` file
+- **Option 2: Show Project Info** - Displays content from `docs/info.md` file
 
 #### **Command Execution**
 - **Option 3: Run Single Command** - Execute one command with mode selection
@@ -147,7 +147,7 @@ py_terminal/
 │   ├── __init__.py
 │   └── main.py          # Main application with all features
 ├── README.md            # This file
-├── info.md             # Project information (optional)
+├── docs/info.md         # Project information (optional)
 ├── venv/               # Virtual environment
 └── LICENSE
 ```
@@ -227,7 +227,7 @@ This project includes a lightweight AI safety layer for command execution:
 
 ### Demo and Submission Assets
 
-- `hackathon/DEMO.md` includes a 90-second walkthrough script for judges
+- `docs/hackathon/DEMO.md` includes a 90-second walkthrough script for judges
 - `terminal_web/status_capture.py` reports repo and environment health
 - The app is designed to work with and without LLM access, which is important for hackathon judging
 

@@ -75,7 +75,7 @@ for token in client.stream([
 | `ai/client.py` | LLMClient implementation (250+ lines) |
 | `verify_llm_setup.py` | Verification script |
 | `QUICKSTART_LITELLM.md` | 5-minute setup guide |
-| `hackathon/llm_setup_plan.md` | Complete setup documentation |
+| `docs/hackathon/llm_setup_plan.md` | Complete setup documentation |
 | `LLM_SETUP_COMPLETE.md` | This completion summary |
 
 ---

@@ -387,9 +387,9 @@ The next 48 hours (Days 3-4) are critical: LLM integration will transform this f
 - ✅ `safety_net.py` (25 lines)
 - ✅ `tests/test_preflight.py` (33 lines)
 - ✅ `requirements.txt` (rich + metadata)
-- ✅ `hackathon/plan.md` (the master plan)
-- ✅ `hackathon/init_state.md` (baseline capture)
-- ✅ `hackathon/submission.md` (hackathon strategy)
+- ✅ `docs/hackathon/plan.md` (the master plan)
+- ✅ `docs/hackathon/init_state.md` (baseline capture)
+- ✅ `docs/hackathon/submission.md` (hackathon strategy)
 - ✅ `ai/client.py` (LLM wrapper)
 - ✅ `ai/prompts.py` (prompt templates)
 - ✅ `ai/healer.py` (failure diagnosis)
@@ -397,7 +397,7 @@ The next 48 hours (Days 3-4) are critical: LLM integration will transform this f
 - ✅ `tests/test_cache.py`
 - ✅ `tests/test_healer.py`
 - ✅ `tests/test_safety_net.py`
-- ✅ `hackathon/DEMO.md` (walkthrough script)
+- ✅ `docs/hackathon/DEMO.md` (walkthrough script)
 
 ### Existing Integration Points
 - ✅ `terminal_web/main.py` (menu item 3/4 can use `safety_net.run()`)

@@ -166,7 +166,7 @@ def gather_status(path: str = '.') -> Dict:
         'requirements.txt',
         '.git',
         'terminal_web',
-        'info.md',
+        'docs/info.md',
     ]
 
     files = [_check_file(base, f) for f in key_files]

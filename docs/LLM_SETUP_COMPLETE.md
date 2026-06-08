@@ -36,7 +36,7 @@
 
 ### 3. **Setup Documentation**
 - **[QUICKSTART_LITELLM.md](QUICKSTART_LITELLM.md)** - 5-minute quick start
-- **[hackathon/llm_setup_plan.md](hackathon/llm_setup_plan.md)** - Complete setup guide (7 phases)
+- **[docs/hackathon/llm_setup_plan.md](hackathon/llm_setup_plan.md)** - Complete setup guide (7 phases)
 
 ### 4. **Verification Tools**
 - **[verify_llm_setup.py](verify_llm_setup.py)** - Automated verification script
@@ -183,7 +183,7 @@ CACHE_DIR="/path/to/cache"         # Cache location
 - [x] LLMClient implementation complete (`ai/client.py`)
 - [x] Verification script created and passing 4/5 checks
 - [x] Quick start guide written ([QUICKSTART_LITELLM.md](QUICKSTART_LITELLM.md))
-- [x] Setup plan documented ([hackathon/llm_setup_plan.md](hackathon/llm_setup_plan.md))
+- [x] Setup plan documented ([docs/hackathon/llm_setup_plan.md](hackathon/llm_setup_plan.md))
 - [x] Requirements.txt updated
 - [ ] Integrate with `ai/preflight.py` for AI-powered risk analysis
 - [ ] Integrate with `safety_net.py` for command inspection
@@ -220,7 +220,7 @@ def analyze_command(cmd: str):
 | Document | Purpose |
 |----------|---------|
 | [QUICKSTART_LITELLM.md](QUICKSTART_LITELLM.md) | 5-minute setup guide |
-| [hackathon/llm_setup_plan.md](hackathon/llm_setup_plan.md) | Complete 6-phase setup plan |
+| [docs/hackathon/llm_setup_plan.md](hackathon/llm_setup_plan.md) | Complete 6-phase setup plan |
 | [ai/config.py](ai/config.py) | Configuration reference |
 | [ai/client.py](ai/client.py) | Client implementation & API docs |
 | [verify_llm_setup.py](verify_llm_setup.py) | Verification & troubleshooting |
