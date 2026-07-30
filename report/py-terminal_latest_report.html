@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Vulnerability Report</title>
+<style>
+body { font-family: system-ui, -apple-system, sans-serif; margin: 40px; color: #333; }
+table { border-collapse: collapse; width: 100%; margin-bottom: 30px; }
+th, td { border: 1px solid #e0e0e0; padding: 12px; text-align: left; }
+th { background-color: #f8f9fa; font-weight: 600; }
+.CRITICAL { color: #dc3545; font-weight: bold; }
+.HIGH { color: #fd7e14; font-weight: bold; }
+.MEDIUM { color: #ffc107; font-weight: bold; }
+.LOW { color: #198754; font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>Container Vulnerability Report</h1>
+<p><strong>Image:</strong> <code>py-terminal:latest</code></p>
+<h2>Target: py-terminal:latest (debian 13.6)</h2>
+<table>
+<tr><th>ID</th><th>Package</th><th>Severity</th><th>Status</th><th>Installed</th><th>Fixed</th><th>Title</th></tr>
+<tr><td>CVE-2011-3374</td><td>apt</td><td class='LOW'>LOW</td><td>affected</td><td>3.0.3</td><td></td><td>It was found that apt-key in apt, all versions, do not correctly valid ...</td></tr>
+<tr><td>TEMP-0841856-B18BAF</td><td>bash</td><td class='LOW'>LOW</td><td>affected</td><td>5.2.37-2+b9</td><td></td><td>[Privilege escalation possible to other user than root]</td></tr>
+<tr><td>CVE-2026-53615</td><td>bsdutils</td><td class='HIGH'>HIGH</td><td>affected</td><td>1:2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>bsdutils</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>bsdutils</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>bsdutils</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>bsdutils</td><td class='LOW'>LOW</td><td>affected</td><td>1:2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>bsdutils</td><td class='LOW'>LOW</td><td>affected</td><td>1:2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>bsdutils</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>1:2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>bsdutils</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>1:2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>bsdutils</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>1:2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2017-18018</td><td>coreutils</td><td class='LOW'>LOW</td><td>affected</td><td>9.7-3</td><td></td><td>coreutils: race condition vulnerability in chown and chgrp</td></tr>
+<tr><td>CVE-2025-5278</td><td>coreutils</td><td class='LOW'>LOW</td><td>affected</td><td>9.7-3</td><td></td><td>coreutils: Heap Buffer Under-Read in GNU Coreutils sort via Key Specification</td></tr>
+<tr><td>CVE-2026-56391</td><td>coreutils</td><td class='LOW'>LOW</td><td>affected</td><td>9.7-3</td><td></td><td>coreutils: GNU coreutils uniq: Denial of Service and information disclosure via out-of-bounds read with multibyte input</td></tr>
+<tr><td>CVE-2026-56392</td><td>coreutils</td><td class='LOW'>LOW</td><td>affected</td><td>9.7-3</td><td></td><td>coreutils: GNU coreutils unexpand: Denial of Service via crafted tab stop values</td></tr>
+<tr><td>CVE-2026-53910</td><td>diffutils</td><td class='LOW'>LOW</td><td>affected</td><td>1:3.10-4</td><td></td><td>diff3tool from GNU diffutilsis vulnerable to a heap\u2011based buffer  ...</td></tr>
+<tr><td>CVE-2026-41992</td><td>gzip</td><td class='HIGH'>HIGH</td><td>affected</td><td>1.13-1</td><td></td><td>GNU gzip contains a global buffer overflow vulnerability in the LZH de ...</td></tr>
+<tr><td>CVE-2026-41991</td><td>gzip</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1.13-1</td><td></td><td>gzip: gzip: Arbitrary file overwrite via insecure temporary file handling in gzexe utility</td></tr>
+<tr><td>CVE-2026-54369</td><td>libacl1</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.3.2-2+b1</td><td></td><td>acl: Symlink traversal privilege escalation via libacl functions</td></tr>
+<tr><td>CVE-2026-54370</td><td>libacl1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.3.2-2+b1</td><td></td><td>acl: TOCTOU Symlink Traversal via getfacl/setfacl</td></tr>
+<tr><td>CVE-2011-3374</td><td>libapt-pkg7.0</td><td class='LOW'>LOW</td><td>affected</td><td>3.0.3</td><td></td><td>It was found that apt-key in apt, all versions, do not correctly valid ...</td></tr>
+<tr><td>CVE-2026-54371</td><td>libattr1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:2.5.2-3</td><td></td><td>attr: Symlink Traversal Privilege Escalation via getfattr and setfattr</td></tr>
+<tr><td>CVE-2026-53615</td><td>libblkid1</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>libblkid1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>libblkid1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>libblkid1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>libblkid1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>libblkid1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>libblkid1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>libblkid1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>libblkid1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2026-42250</td><td>libbz2-1.0</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1.0.8-6</td><td></td><td>bzip2: bzip2: Denial of Service in bzip2recover via a specially crafted file</td></tr>
+<tr><td>CVE-2026-5435</td><td>libc-bin</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Out-of-bounds write via TSIG record processing</td></tr>
+<tr><td>CVE-2026-5450</td><td>libc-bin</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Heap Buffer Overflow in `scanf` with `%mc` format specifier and large width</td></tr>
+<tr><td>CVE-2026-5928</td><td>libc-bin</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Information disclosure or denial of service via ungetwc function with specific wide character encodings</td></tr>
+<tr><td>CVE-2026-6238</td><td>libc-bin</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Application crash or uninitialized memory read via crafted DNS response</td></tr>
+<tr><td>CVE-2010-4756</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glob implementation can cause excessive CPU and memory consumption due to crafted glob expressions</td></tr>
+<tr><td>CVE-2018-20796</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: uncontrolled recursion in function check_dst_limits_calc_pos_1 in posix/regexec.c</td></tr>
+<tr><td>CVE-2019-1010022</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: stack guard protection bypass</td></tr>
+<tr><td>CVE-2019-1010023</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: running ldd on malicious ELF leads to code execution because of wrong size computation</td></tr>
+<tr><td>CVE-2019-1010024</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: ASLR bypass using cache of thread stack and heap</td></tr>
+<tr><td>CVE-2019-1010025</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: information disclosure of heap addresses of pthread_created thread</td></tr>
+<tr><td>CVE-2019-9192</td><td>libc-bin</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: uncontrolled recursion in function check_dst_limits_calc_pos_1 in posix/regexec.c</td></tr>
+<tr><td>CVE-2026-5435</td><td>libc6</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Out-of-bounds write via TSIG record processing</td></tr>
+<tr><td>CVE-2026-5450</td><td>libc6</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Heap Buffer Overflow in `scanf` with `%mc` format specifier and large width</td></tr>
+<tr><td>CVE-2026-5928</td><td>libc6</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Information disclosure or denial of service via ungetwc function with specific wide character encodings</td></tr>
+<tr><td>CVE-2026-6238</td><td>libc6</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glibc: Application crash or uninitialized memory read via crafted DNS response</td></tr>
+<tr><td>CVE-2010-4756</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: glob implementation can cause excessive CPU and memory consumption due to crafted glob expressions</td></tr>
+<tr><td>CVE-2018-20796</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: uncontrolled recursion in function check_dst_limits_calc_pos_1 in posix/regexec.c</td></tr>
+<tr><td>CVE-2019-1010022</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: stack guard protection bypass</td></tr>
+<tr><td>CVE-2019-1010023</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: running ldd on malicious ELF leads to code execution because of wrong size computation</td></tr>
+<tr><td>CVE-2019-1010024</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: ASLR bypass using cache of thread stack and heap</td></tr>
+<tr><td>CVE-2019-1010025</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: information disclosure of heap addresses of pthread_created thread</td></tr>
+<tr><td>CVE-2019-9192</td><td>libc6</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-12+deb13u3</td><td></td><td>glibc: uncontrolled recursion in function check_dst_limits_calc_pos_1 in posix/regexec.c</td></tr>
+<tr><td>CVE-2026-53615</td><td>liblastlog2-2</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>liblastlog2-2</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>liblastlog2-2</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>liblastlog2-2</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>liblastlog2-2</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>liblastlog2-2</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>liblastlog2-2</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>liblastlog2-2</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>liblastlog2-2</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2026-53615</td><td>libmount1</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>libmount1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>libmount1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>libmount1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>libmount1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>libmount1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>libmount1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>libmount1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>libmount1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2025-69720</td><td>libncursesw6</td><td class='HIGH'>HIGH</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>ncurses: ncurses: Buffer overflow vulnerability may lead to arbitrary code execution.</td></tr>
+<tr><td>CVE-2025-6141</td><td>libncursesw6</td><td class='LOW'>LOW</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>gnu-ncurses: ncurses Stack Buffer Overflow</td></tr>
+<tr><td>CVE-2026-54411</td><td>libpam-modules</td><td class='MEDIUM'>MEDIUM</td><td>fix_deferred</td><td>1.7.0-5</td><td></td><td>linux-pam: Plaintext password recovery via timing discrepancy in pam_userdb module</td></tr>
+<tr><td>CVE-2026-54411</td><td>libpam-modules-bin</td><td class='MEDIUM'>MEDIUM</td><td>fix_deferred</td><td>1.7.0-5</td><td></td><td>linux-pam: Plaintext password recovery via timing discrepancy in pam_userdb module</td></tr>
+<tr><td>CVE-2026-54411</td><td>libpam-runtime</td><td class='MEDIUM'>MEDIUM</td><td>fix_deferred</td><td>1.7.0-5</td><td></td><td>linux-pam: Plaintext password recovery via timing discrepancy in pam_userdb module</td></tr>
+<tr><td>CVE-2026-54411</td><td>libpam0g</td><td class='MEDIUM'>MEDIUM</td><td>fix_deferred</td><td>1.7.0-5</td><td></td><td>linux-pam: Plaintext password recovery via timing discrepancy in pam_userdb module</td></tr>
+<tr><td>CVE-2026-53615</td><td>libsmartcols1</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>libsmartcols1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>libsmartcols1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>libsmartcols1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>libsmartcols1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>libsmartcols1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>libsmartcols1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>libsmartcols1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>libsmartcols1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2026-11822</td><td>libsqlite3-0</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>3.46.1-7+deb13u1</td><td></td><td>SQLite before 3.53.2 contains memory corruption vulnerabilities in the ...</td></tr>
+<tr><td>CVE-2026-11824</td><td>libsqlite3-0</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>3.46.1-7+deb13u1</td><td></td><td>SQLite before 3.53.2 contains a heap-based buffer overflow vulnerabili ...</td></tr>
+<tr><td>CVE-2026-50812</td><td>libsqlite3-0</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>3.46.1-7+deb13u1</td><td></td><td>A NULL pointer dereference in the SQLite Session Extension in SQLite 3 ...</td></tr>
+<tr><td>CVE-2026-50813</td><td>libsqlite3-0</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>3.46.1-7+deb13u1</td><td></td><td>An issue in SQLite before Fossil check-in 869a51ae84df allows a local  ...</td></tr>
+<tr><td>CVE-2021-45346</td><td>libsqlite3-0</td><td class='LOW'>LOW</td><td>affected</td><td>3.46.1-7+deb13u1</td><td></td><td>sqlite: crafted SQL query allows a malicious user to obtain sensitive information</td></tr>
+<tr><td>CVE-2025-70873</td><td>libsqlite3-0</td><td class='LOW'>LOW</td><td>affected</td><td>3.46.1-7+deb13u1</td><td></td><td>sqlite: SQLite: Information Disclosure via Crafted ZIP File</td></tr>
+<tr><td>CVE-2013-4392</td><td>libsystemd0</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>systemd: TOCTOU race condition when updating file permissions and SELinux security contexts</td></tr>
+<tr><td>CVE-2023-31437</td><td>libsystemd0</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>An issue was discovered in systemd 253. An attacker can modify a seale ...</td></tr>
+<tr><td>CVE-2023-31438</td><td>libsystemd0</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>An issue was discovered in systemd 253. An attacker can truncate a sea ...</td></tr>
+<tr><td>CVE-2023-31439</td><td>libsystemd0</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>An issue was discovered in systemd 253. An attacker can modify the con ...</td></tr>
+<tr><td>CVE-2026-40228</td><td>libsystemd0</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>systemd: systemd-journald: Unintended output to user terminals via logger command</td></tr>
+<tr><td>CVE-2025-69720</td><td>libtinfo6</td><td class='HIGH'>HIGH</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>ncurses: ncurses: Buffer overflow vulnerability may lead to arbitrary code execution.</td></tr>
+<tr><td>CVE-2025-6141</td><td>libtinfo6</td><td class='LOW'>LOW</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>gnu-ncurses: ncurses Stack Buffer Overflow</td></tr>
+<tr><td>CVE-2013-4392</td><td>libudev1</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>systemd: TOCTOU race condition when updating file permissions and SELinux security contexts</td></tr>
+<tr><td>CVE-2023-31437</td><td>libudev1</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>An issue was discovered in systemd 253. An attacker can modify a seale ...</td></tr>
+<tr><td>CVE-2023-31438</td><td>libudev1</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>An issue was discovered in systemd 253. An attacker can truncate a sea ...</td></tr>
+<tr><td>CVE-2023-31439</td><td>libudev1</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>An issue was discovered in systemd 253. An attacker can modify the con ...</td></tr>
+<tr><td>CVE-2026-40228</td><td>libudev1</td><td class='LOW'>LOW</td><td>affected</td><td>257.13-1~deb13u1</td><td></td><td>systemd: systemd-journald: Unintended output to user terminals via logger command</td></tr>
+<tr><td>CVE-2026-53615</td><td>libuuid1</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>libuuid1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>libuuid1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>libuuid1</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>libuuid1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>libuuid1</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>libuuid1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>libuuid1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>libuuid1</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2026-53615</td><td>login</td><td class='HIGH'>HIGH</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>login</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>login</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>login</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>login</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>login</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>login</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>login</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>login</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>1:4.16.0-2+really2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2007-5686</td><td>login.defs</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.17.4-2</td><td></td><td>initscripts in rPath Linux 1 sets insecure permissions for the /var/lo ...</td></tr>
+<tr><td>CVE-2024-56433</td><td>login.defs</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.17.4-2</td><td></td><td>shadow-utils: Default subordinate ID configuration in /etc/login.defs could lead to compromise</td></tr>
+<tr><td>TEMP-0628843-DBAD28</td><td>login.defs</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.17.4-2</td><td></td><td>[more related to CVE-2005-4890]</td></tr>
+<tr><td>CVE-2026-53615</td><td>mount</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>mount</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>mount</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>mount</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>mount</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>mount</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>mount</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>mount</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>mount</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2025-69720</td><td>ncurses-base</td><td class='HIGH'>HIGH</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>ncurses: ncurses: Buffer overflow vulnerability may lead to arbitrary code execution.</td></tr>
+<tr><td>CVE-2025-6141</td><td>ncurses-base</td><td class='LOW'>LOW</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>gnu-ncurses: ncurses Stack Buffer Overflow</td></tr>
+<tr><td>CVE-2025-69720</td><td>ncurses-bin</td><td class='HIGH'>HIGH</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>ncurses: ncurses: Buffer overflow vulnerability may lead to arbitrary code execution.</td></tr>
+<tr><td>CVE-2025-6141</td><td>ncurses-bin</td><td class='LOW'>LOW</td><td>affected</td><td>6.5+20250216-2</td><td></td><td>gnu-ncurses: ncurses Stack Buffer Overflow</td></tr>
+<tr><td>CVE-2007-5686</td><td>passwd</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.17.4-2</td><td></td><td>initscripts in rPath Linux 1 sets insecure permissions for the /var/lo ...</td></tr>
+<tr><td>CVE-2024-56433</td><td>passwd</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.17.4-2</td><td></td><td>shadow-utils: Default subordinate ID configuration in /etc/login.defs could lead to compromise</td></tr>
+<tr><td>TEMP-0628843-DBAD28</td><td>passwd</td><td class='LOW'>LOW</td><td>affected</td><td>1:4.17.4-2</td><td></td><td>[more related to CVE-2005-4890]</td></tr>
+<tr><td>CVE-2026-13221</td><td>perl-base</td><td class='CRITICAL'>CRITICAL</td><td>affected</td><td>5.40.1-6</td><td></td><td>Perl versions through 5.43.9 produce silently incorrect regular expres ...</td></tr>
+<tr><td>CVE-2026-42496</td><td>perl-base</td><td class='CRITICAL'>CRITICAL</td><td>fix_deferred</td><td>5.40.1-6</td><td></td><td>perl-archive-tar: perl-archive-tar: Path traversal via crafted symlinks allows arbitrary file access</td></tr>
+<tr><td>CVE-2026-57433</td><td>perl-base</td><td class='CRITICAL'>CRITICAL</td><td>affected</td><td>5.40.1-6</td><td></td><td>Storable versions before 3.41 for Perl have a signed integer overflow  ...</td></tr>
+<tr><td>CVE-2026-8376</td><td>perl-base</td><td class='CRITICAL'>CRITICAL</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl: Perl: Heap buffer overflow when compiling regular expressions on 32-bit builds</td></tr>
+<tr><td>CVE-2026-42497</td><td>perl-base</td><td class='HIGH'>HIGH</td><td>fix_deferred</td><td>5.40.1-6</td><td></td><td>perl-Archive-Tar: perl-Archive-Tar: Arbitrary file modification via crafted hardlinks during archive extraction</td></tr>
+<tr><td>CVE-2026-48962</td><td>perl-base</td><td class='HIGH'>HIGH</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl-IO-Compress: perl-IO-Compress: Arbitrary code execution via attacker-controlled output glob</td></tr>
+<tr><td>CVE-2026-57432</td><td>perl-base</td><td class='HIGH'>HIGH</td><td>affected</td><td>5.40.1-6</td><td></td><td>Perl versions through 5.43.10 have an integer overflow in S_measure_st ...</td></tr>
+<tr><td>CVE-2026-9538</td><td>perl-base</td><td class='HIGH'>HIGH</td><td>fix_deferred</td><td>5.40.1-6</td><td></td><td>perl-Archive-Tar: perl-Archive-Tar: Denial of Service via crafted tar header with large entry size</td></tr>
+<tr><td>CVE-2025-15649</td><td>perl-base</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl-IO-Compress: perl-IO-Compress: Denial of Service via malformed DOS date in zip header</td></tr>
+<tr><td>CVE-2026-12087</td><td>perl-base</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl-Socket: perl-Socket: Information Disclosure due to Out-of-Bounds Read</td></tr>
+<tr><td>CVE-2026-48959</td><td>perl-base</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl-IO-Compress: perl-IO-Compress: CPU exhaustion via per-byte read loop in fastForward</td></tr>
+<tr><td>CVE-2026-48961</td><td>perl-base</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl-IO-Compress: IO::Compress: Denial of Service in zipdetails CLI tool via malformed Info-ZIP Unix Extra Field</td></tr>
+<tr><td>CVE-2026-7010</td><td>perl-base</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>5.40.1-6</td><td></td><td>HTTP::Tiny versions before 0.093 for Perl do not validate CRLF in HTTP ...</td></tr>
+<tr><td>CVE-2011-4116</td><td>perl-base</td><td class='LOW'>LOW</td><td>affected</td><td>5.40.1-6</td><td></td><td>perl: File:: Temp insecure temporary file handling</td></tr>
+<tr><td>CVE-2026-7017</td><td>perl-base</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>5.40.1-6</td><td></td><td>HTTP::Tiny versions before 0.095 for Perl forward credential headers t ...</td></tr>
+<tr><td>TEMP-0517018-A83CE6</td><td>sysvinit-utils</td><td class='LOW'>LOW</td><td>affected</td><td>3.14-4</td><td></td><td>[sysvinit: no-root option in expert installer exposes locally exploitable security flaw]</td></tr>
+<tr><td>CVE-2026-5704</td><td>tar</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1.35+dfsg-3.1</td><td></td><td>tar: tar: Hidden file injection via crafted archives</td></tr>
+<tr><td>CVE-2005-2541</td><td>tar</td><td class='LOW'>LOW</td><td>affected</td><td>1.35+dfsg-3.1</td><td></td><td>tar: does not properly warn the user when extracting setuid or setgid files</td></tr>
+<tr><td>TEMP-0290435-0B57B5</td><td>tar</td><td class='LOW'>LOW</td><td>affected</td><td>1.35+dfsg-3.1</td><td></td><td>[tar's rmt command may have undesired side effects]</td></tr>
+<tr><td>CVE-2026-53615</td><td>util-linux</td><td class='HIGH'>HIGH</td><td>affected</td><td>2.41-5</td><td></td><td>[Integer Overflow or Wraparound in libblkid/src/partitions/dos.c]</td></tr>
+<tr><td>CVE-2026-13595</td><td>util-linux</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: heap use-after-free in libblkid nested partition probing</td></tr>
+<tr><td>CVE-2026-27456</td><td>util-linux</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: TOCTOU in the mount program when setting up loop devices</td></tr>
+<tr><td>CVE-2026-3184</td><td>util-linux</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Access control bypass due to improper hostname canonicalization</td></tr>
+<tr><td>CVE-2022-0563</td><td>util-linux</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: partial disclosure of arbitrary files in chfn and chsh when compiled with libreadline</td></tr>
+<tr><td>CVE-2025-14104</td><td>util-linux</td><td class='LOW'>LOW</td><td>affected</td><td>2.41-5</td><td></td><td>util-linux: util-linux: Heap buffer overread in setpwnam() when processing 256-byte usernames</td></tr>
+<tr><td>CVE-2026-53612</td><td>util-linux</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) hook_owner.c chmod/chown]</td></tr>
+<tr><td>CVE-2026-53613</td><td>util-linux</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via TOCTOU in mount(8) - Target Path Redirection]</td></tr>
+<tr><td>CVE-2026-53614</td><td>util-linux</td><td class='UNKNOWN'>UNKNOWN</td><td>affected</td><td>2.41-5</td><td></td><td>[Local Privilege Escalation via LIBMOUNT_FORCE_MOUNT2 Environment Variable - nosuid/noexec Bypass in SUID mount(8)]</td></tr>
+<tr><td>CVE-2026-27171</td><td>zlib1g</td><td class='MEDIUM'>MEDIUM</td><td>affected</td><td>1:1.3.dfsg+really1.3.1-1+b1</td><td></td><td>zlib: zlib: Denial of Service via infinite loop in CRC32 combine functions</td></tr>
+</table>
+<h2>Target: Python</h2>
+<table>
+<tr><th>ID</th><th>Package</th><th>Severity</th><th>Status</th><th>Installed</th><th>Fixed</th><th>Title</th></tr>
+<tr><td>CVE-2025-8869</td><td>pip</td><td class='MEDIUM'>MEDIUM</td><td>fixed</td><td>25.0.1</td><td>25.3</td><td>pip: pip missing checks on symbolic link extraction</td></tr>
+<tr><td>CVE-2026-3219</td><td>pip</td><td class='MEDIUM'>MEDIUM</td><td>fixed</td><td>25.0.1</td><td>26.1</td><td>pip: pip: Incorrect file installation due to improper archive handling</td></tr>
+<tr><td>CVE-2026-6357</td><td>pip</td><td class='MEDIUM'>MEDIUM</td><td>fixed</td><td>25.0.1</td><td>26.1</td><td>pip: pip: Arbitrary code execution or information disclosure via malicious wheel package installation</td></tr>
+<tr><td>CVE-2026-8643</td><td>pip</td><td class='MEDIUM'>MEDIUM</td><td>fixed</td><td>25.0.1</td><td>26.1.2</td><td>python-pip: Path traversal via malicious entry point name in pip wheel installation allows arbitrary file overwrite</td></tr>
+<tr><td>CVE-2026-1703</td><td>pip</td><td class='LOW'>LOW</td><td>fixed</td><td>25.0.1</td><td>26.0</td><td>pip: pip: Information disclosure via path traversal when installing crafted wheel archives</td></tr>
+</table>
+</body></html>
