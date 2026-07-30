@@ -1,5 +1,8 @@
 rich>=15.0.0
 importlib-metadata; python_version < "3.8"
-litellm==1.83.7
-openai==2.30.0
+litellm==1.93.0
+openai==2.41.0
 pytest
+aiohttp>=3.14.1
+click>=8.3.3
+python-dotenv>=1.2.2

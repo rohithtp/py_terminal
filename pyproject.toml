@@ -15,8 +15,11 @@ authors = [
 license = { file = "LICENSE" }
 dependencies = [
   "rich>=15.0.0",
-  "litellm==1.83.7",
-  "openai==2.30.0",
+  "litellm==1.93.0",
+  "openai==2.41.0",
+  "aiohttp>=3.14.1",
+  "click>=8.3.3",
+  "python-dotenv>=1.2.2",
 ]
 classifiers = [
   "Programming Language :: Python :: 3.12",
