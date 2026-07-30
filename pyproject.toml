@@ -15,7 +15,7 @@ authors = [
 license = { file = "LICENSE" }
 dependencies = [
   "rich>=15.0.0",
-  "litellm==1.87.1",
+  "litellm==1.93.0",
   "openai==2.41.0",
 ]
 classifiers = [
