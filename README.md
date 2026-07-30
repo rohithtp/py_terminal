@@ -55,7 +55,14 @@ source venv/bin/activate
 python terminal_web/main.py
 ```
 
-### Run with Docker
+### Run with Docker (via Colima)
+
+If you are on macOS or Linux and using [Colima](https://github.com/abiosoft/colima) as your container runtime, start it first. To prevent resource starvation (e.g., on an M2 with 16GB RAM), it is recommended to run Colima in foreground mode with CPU and memory limits. This ensures it shuts down cleanly when you close the terminal:
+```sh
+colima start --foreground --cpu 2 --memory 4
+```
+
+Then, in a new terminal, build and run the container:
 ```sh
 docker build -t py-terminal:latest .
 docker run --rm -it \
@@ -66,6 +73,21 @@ docker run --rm -it \
 ```
 
 > Use `-it` so the interactive terminal menu works correctly.
+
+### Verify Container Safety (with Trivy)
+
+We recommend using [Trivy](https://trivy.dev/) to scan your built container image for vulnerabilities before running it.
+
+If you don't have Trivy installed, you can [install it](https://trivy.dev/latest/getting-started/installation/) (e.g., `brew install trivy` on macOS).
+
+To easily verify the safety of your local container image:
+```sh
+# 1. Build the image
+docker build -t py-terminal:latest .
+
+# 2. Run Trivy to scan for OS and library vulnerabilities
+trivy image --vuln-type os,library py-terminal:latest
+```
 
 ## 🎮 Usage
 
